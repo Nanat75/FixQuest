@@ -1,0 +1,296 @@
+
+/* scanline overlay */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(
+    rgba(255, 255, 255, 0.02) 0px,
+    rgba(255, 255, 255, 0.02) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* garage door stays the same */
+.garage-door {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    repeating-linear-gradient(
+      #888 0 20px,
+      #777 20px 40px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.1) 0%,
+      rgba(0,0,0,0.1) 50%,
+      rgba(255,255,255,0.1) 100%
+    );
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+  z-index: 1;
+  border-top: 4px solid #555;
+  border-bottom: 4px solid #555;
+  transition: transform 2s ease-in-out;
+  overflow: hidden;
+  position: relative;
+}
+
+/* rivets */
+.garage-door::before,
+.garage-door::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(#333 5%, transparent 6%) ,
+    radial-gradient(#333 5%, transparent 6%);
+  background-size: 40px 40px;
+  background-position: 20px 20px, 40px 40px;
+  pointer-events: none;
+}
+
+.garage-panels {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background:
+    repeating-linear-gradient(
+      #888 0 20px,
+      #777 20px 40px
+    );
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+  border-top: 4px solid #555;
+  border-bottom: 4px solid #555;
+  transition: transform 2s cubic-bezier(0.77, 0, 0.175, 1);
+  overflow: hidden;
+}
+.garage-panels::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(#333 5%, transparent 6%) ,
+    radial-gradient(#333 5%, transparent 6%);
+  background-size: 40px 40px;
+  background-position: 20px 20px, 40px 40px;
+  pointer-events: none;
+}
+.garage-panels.open {
+  transform: translateY(-100%);
+}
+
+
+.garage-panels .panel {
+  width: 100%;
+  height: calc(100% / 6); /* 6 panels */
+  background: repeating-linear-gradient(
+    #888 0 20px,
+    #777 20px 40px
+  );
+  border-top: 2px solid #555;
+  border-bottom: 2px solid #555;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+  transition: transform 0.5s ease-in-out;
+  position: relative;
+}
+
+/* add rivets on each panel too */
+.garage-panels .panel::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(#333 5%, transparent 6%) ,
+    radial-gradient(#333 5%, transparent 6%);
+  background-size: 40px 40px;
+  background-position: 20px 20px, 40px 40px;
+  pointer-events: none;
+}
+
+/* triggered opening animation */
+.garage-panels.open .panel:nth-child(1) {
+  transform: translateY(-600%);
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  transition-delay: 0s;
+}
+.garage-panels.open .panel:nth-child(2) {
+  transform: translateY(-600%);
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  transition-delay: 0.3s;
+}
+.garage-panels.open .panel:nth-child(3) {
+  transform: translateY(-600%);
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  transition-delay: 0.6s;
+}
+.garage-panels.open .panel:nth-child(4) {
+  transform: translateY(-600%);
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  transition-delay: 0.9s;
+}
+.garage-panels.open .panel:nth-child(5) {
+  transform: translateY(-600%);
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  transition-delay: 1.2s;
+}
+.garage-panels.open .panel:nth-child(6) {
+  transform: translateY(-600%);
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  transition-delay: 1.5s;
+}
+
+.handunit {
+  position: fixed;
+  bottom: -700px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: #1a1a1a;
+  border: 8px solid #0d0d0d;
+  border-radius: 16px;
+  box-shadow: 0 0 25px #000;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  transition: bottom 1s ease;
+  z-index: 2;
+}
+
+.handunit.show {
+  bottom: 40px;
+}
+.handunit.slide-down {
+  bottom: -800px;
+}
+
+.handunit-handle {
+  width: 80px;
+  height: 300px;
+  background: #333;
+  border-radius: 8px 0 0 8px;
+  margin-left: -80px;
+  box-shadow: inset -4px 0 #555;
+}
+
+.handunit-body {
+  flex: 1;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* screen update */
+.handunit-screen {
+  background: radial-gradient(circle at center, #000 60%, #111 100%);
+  color: white;
+  width: 90%;
+  height: 300px;
+  border: 4px solid #0044cc;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  text-align: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.screen-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.screen-text {
+  font-size: 20px;
+  margin: 0;
+  position: absolute;
+  top: 80px;
+  color: #ffffff;
+  text-shadow: 0 0 3px #00ffcc;
+}
+
+/* mascot and chat */
+.handunit-screen .handunit-chat {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.handunit-screen .mascot img {
+  width: 210px;
+  height: auto;
+  margin-top: 110px;
+}
+
+.handunit-screen .speech-bubble {
+  position: relative;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 10px;
+  padding: 10px 16px;
+  color: #000;
+  font-size: 12px;
+  max-width: 220px;
+  line-height: 1.4;
+  margin-top: 120px;
+  box-shadow: 3px 3px 0 #000;
+}
+
+.handunit-screen .speech-bubble::after {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-right-color: #fff;
+  border-left: 0;
+  margin-top: -8px;
+}
+
+/* login/register buttons */
+.handunit-buttons {
+  display: flex;
+  gap: 20px;
+}
+.handunit-buttons button {
+  background: #002288;
+  color: #fff;
+  border: 2px solid #00ffcc;
+  padding: 6px 12px;
+  font-family: 'Press Start 2P', monospace;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  box-shadow: 2px 2px 0 #000;
+}
+.handunit-buttons button:hover {
+  background: #00ffcc;
+  color: #000;
+  transform: translateY(-2px);
+}

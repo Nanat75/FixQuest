@@ -1,0 +1,1193 @@
+
+.dashboard-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 40px;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* 🔹 Door Icon */
+.icon.door {
+    position: absolute;
+    top: 90px;
+    left: -185px;
+    width: 750px;
+    cursor: pointer;
+}
+
+.icon.print {
+    position: absolute;
+    top: 580px;
+    right: 1px;
+    width: 250px;
+    cursor: pointer;
+    z-index: 200;
+}
+
+/* 🗨️ OMORI-style dialog box */
+
+.omori-dialog {
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+    z-index: 15;
+    font-family: 'Press Start 2P', monospace;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 24px;
+}
+
+.character-name {
+    background: #000;
+    color: white;
+    padding: 6px 16px;
+    border: 3px solid #fff;
+    font-size: 18px;
+    letter-spacing: 1px;
+    box-shadow: 3px 3px 0 #444;
+}
+
+.dialog-box {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 20px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: white;
+}
+
+.dialog-portrait {
+    width: 180px;
+    height: 180px;
+    border: 4px solid #343f54;
+    background: linear-gradient(145deg, #c7d4e5, #e4ecf6); /* Softer gradient for depth */
+    object-fit: cover;
+    image-rendering: pixelated;
+    border-radius: 8px;
+    box-shadow: 4px 4px 0 #000, inset 2px 2px 0 #fff; /* Matches popout theme */
+    transition: transform 0.3s ease;
+}
+
+.dialog-portrait:hover {
+    transform: scale(1.03); 
+}
+
+.dialog-portrait::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px dashed #e5ebff;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    pointer-events: none;
+    border-radius: 8px;
+}
+
+.dialog-text {
+    font-size: 30px;
+    line-height: 1.6;
+    padding: 20px 24px;
+    background: #000;
+    border: 3px solid #fff;
+    color: white;
+    max-width: 1000px;
+    min-width: 360px;
+    box-shadow: 4px 4px 0 #333;
+}
+
+.character-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #b3c3e6;
+    border: 3px solid #fff;
+    padding: 20px;
+    box-shadow: 4px 4px 0 #000;
+    max-width: 1000px;
+}
+
+.dialog-text {
+    font-size: 20px;
+    line-height: 1.4;
+    color: #fff;
+}
+
+.dialog-options {
+    display: flex;
+    gap: 12px;
+}
+
+.dialog-options button,
+.option-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  background: #fff;
+  border: 2px solid #000;
+  color: #000;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dialog-options button:hover,
+.option-btn:hover {
+  background: #ddd;
+  transform: scale(1.03);
+}
+
+/* 🔹 Middle Interaction Area */
+.interaction-area {
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+
+.icon.pc {
+    width: 720px;
+    cursor: pointer;
+    position: absolute;   
+    top: 1px;            
+    left: 320px;           
+    image-rendering: pixelated; 
+    z-index: 5;           
+}
+
+/*  Modal Style */
+.modal {
+  display: none;
+  position: absolute;
+  top: 90px;
+  left: 65%;
+  transform: translateX(-50%) scale(0); 
+  width: 400px;
+  background: #fff;
+  border: 4px solid #345075;
+  box-shadow: 8px 8px 0 #000;
+  padding: 20px;
+  font-family: 'Press Start 2P', monospace;
+  z-index: 1000;
+  border-radius: 8px;
+  color: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 80vh;
+ overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Modal Title */
+.modal h3 {
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: #345075;
+  border-bottom: 2px dashed #345075;
+  padding-bottom: 8px;
+  text-align: center;
+}
+
+/* Modal Buttons */
+.modal-content button {
+  display: block;
+  width: 100%;
+  margin: 6px 0;
+  padding: 10px 8px;
+  background: #345075;
+  color: #fff;
+  font-size: 15px;
+  border: 2px solid #000;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-content button:hover {
+  background: #2a3f5c;
+  transform: scale(1.02);
+}
+
+/* Inputs */
+.modal-content input,
+.modal-content select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #fff;
+  border: 2px solid #345075;
+  border-radius: 5px;
+  font-family: 'Courier New', monospace;
+  padding: 12px 40px 12px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 12px;
+}
+
+/* Pixel art header */
+.modal::before {
+  content: "▛▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▜";
+  display: block;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  text-align: center;
+  background: #345075;
+  color: #fff;
+  padding: 4px 0;
+  margin: -20px -20px 12px -20px;
+}
+
+/* Show Modal with TV-on Animation */
+.modal.show {
+  display: flex !important;
+  animation: tv-on 0.4s ease forwards;
+  pointer-events: auto;
+}
+
+/* Hide Modal with TV-off Animation */
+.modal.closing {
+  display: flex !important;
+  animation: tv-off 0.3s ease forwards;
+  pointer-events: none;
+}
+
+/* Fully Hidden */
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  font-family: 'Press Start 2P', monospace;
+  background: #fdfdfd;
+  border: 2px solid #000;
+  box-shadow: 4px 4px 0 #345075;
+  padding: 28px 24px;
+  width: 100%;
+  max-width: 350px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* increased from 16px */
+  border-radius: 8px;
+}
+
+
+.modal-title {
+  font-size: 16px;
+  color: #222;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* Add a small vertical gap */
+  margin-bottom: 12px; /* Adds space between groups */
+}
+
+.form-group label {
+  font-size: 10px;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px; /* <-- Add this line */
+}
+
+.kerusakan-items {
+  display: flex;
+  flex-direction: column; /* stack rows vertically */
+  gap: 8px;
+}
+
+.kerusakan-row {
+  display: flex;
+  flex-direction: row; /* row stays horizontal */
+  gap: 6px;
+  align-items: center;
+}
+
+.form-group.kerusakan-harga-group .kerusakan-row input[name="kerusakan[]"] {
+  width: 180px !important;
+}
+
+.form-group.kerusakan-harga-group .kerusakan-row input[name="harga[]"] {
+  width: 120px !important;
+}
+
+
+.form-group.kerusakan-harga-group .kerusakan-row {
+  flex-wrap: nowrap; 
+}
+
+
+.btn-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.btn-save,
+.btn-cancel {
+  flex: 1;
+  font-size: 11px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 2px solid #000;
+  cursor: pointer;
+  font-family: 'Press Start 2P', monospace;
+  transition: 0.2s ease all;
+}
+
+.btn-save {
+  background-color: #2db659;
+  color: #fff;
+}
+
+.btn-cancel {
+  background-color: #d33f49;
+  color: #fff;
+}
+
+.btn-save:hover {
+  background-color: #27a14f;
+}
+
+.btn-cancel:hover {
+  background-color: #b52d3a;
+}
+
+/* TV On Animation */
+@keyframes tv-on {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scaleY(0.1) scaleX(1.5);
+    filter: brightness(500%);
+  }
+  60% {
+    opacity: 0.8;
+    transform: translateX(-50%) scaleY(1.2) scaleX(0.95);
+    filter: brightness(120%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+    filter: brightness(100%);
+  }
+}
+
+/* TV Off Animation */
+@keyframes tv-off {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+    filter: brightness(100%);
+  }
+  80% {
+    opacity: 0.5;
+    transform: translateX(-50%) scaleY(0.1) scaleX(1.3);
+    filter: brightness(300%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0);
+    filter: brightness(0%);
+  }
+}
+
+
+/* 🔹 Right Dashboard Board */
+.dashboard-board {
+  width: 400px; /* ⬆ was 300px */
+  height: 480px; /* ⬆ was 450px */
+  background: #fdfdfd;
+  border: 4px solid #345075;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 4px 4px 0 #000;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-x: hidden; 
+  margin-right: -20px;
+}
+
+.dashboard-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  background: #345075;
+  color: #fff;
+  text-align: center;
+  padding: 8px;
+  border: 2px solid #000;
+  box-shadow: 2px 2px 0 #000;
+}
+
+.dashboard-board input,
+.dashboard-board select {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 2px solid #345075;
+    border-radius: 5px;
+    box-sizing: border-box; /* 🔧 This line prevents overflow */
+}
+
+
+.data-box {
+  background: #ffffff;
+  border: 3px double #345075;
+  padding: 12px;
+  font-size: 12px;
+  line-height: 1.4;
+  font-family: 'Press Start 2P', monospace;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  box-shadow: 3px 3px 0 #345075;
+  position: relative;
+}
+.data-box button {
+  margin-top: 6px;
+  font-size: 10px;
+  background: #345075;
+  color: #fff;
+  border: 2px solid #000;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.data-box button:hover {
+  background: #2a3f5c;
+}
+
+
+  .filter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.filter-form input,
+.filter-form select {
+  width: 100%;
+  padding: 10px;
+  font-size: 12px;
+  border: 2px solid #345075;
+  font-family: 'Press Start 2P', monospace;
+}
+
+.dashboard-board p {
+  background: #fef5d7;
+  border: 2px dashed #d3a93e;
+  padding: 10px;
+  font-size: 11px;
+  font-family: 'Press Start 2P', monospace;
+  color: #000;
+  border-radius: 6px;
+}
+
+
+  /* Popout style for dashboard */
+.popout-shadow {
+    box-shadow: 6px 6px 0 #000, 2px 2px 0 #000 inset;
+    transition: all 0.3s ease;
+}
+
+.dashboard-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+
+
+/* Animated cards */
+.animated-card {
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+.animated-card:hover {
+    transform: translateY(-3px);
+    background: #eaf6ff;
+}
+
+/* Search button styling */
+.btn-search {
+    background: #345075;
+    color: #fff;
+    border: 2px solid #000;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn-search:hover {
+    background: #2a3f5c;
+}
+
+/* 🔧 VISUAL POLISH & THEME REFINEMENT */
+
+/* General button upgrades */
+.dialog-options button,
+.option-btn,
+.btn-save,
+.btn-cancel,
+.data-box button,
+.modal-content button,
+.btn-search {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  background: #345075;
+  border: 2px solid #000;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 6px;
+  box-shadow: 2px 2px 0 #000;
+  transition: all 0.2s ease;
+}
+
+.dialog-options button:hover,
+.option-btn:hover,
+.btn-save:hover,
+.btn-cancel:hover,
+.data-box button:hover,
+.modal-content button:hover,
+.btn-search:hover {
+  background: #20273c;
+  transform: scale(1.03);
+}
+
+/* Input style unification */
+input,
+select,
+.modal-content input,
+.modal-content select,
+.dashboard-board input,
+.dashboard-board select,
+.filter-form input,
+.filter-form select {
+  font-family: 'Press Start 2P', monospace;
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #345075;
+  padding: 10px 12px;
+  font-size: 12px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* Dialog box glow and cohesion */
+.omori-dialog {
+  background: rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  border-radius: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(40px);
+}
+
+.dialog-content {
+  background: #d9e0e7;
+  border: 3px solid #343f54;
+  box-shadow: 6px 6px 0 #000;
+  border-radius: 12px;
+}
+
+.dialog-text {
+  background: #304a6c;
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 1.5;
+  padding: 20px;
+  border: 3px solid #e5ebff;
+  box-shadow: 4px 4px 0 #222;
+}
+
+/* Omori Dialog Animation */
+@keyframes dialog-pop {
+  0% {
+    transform: translateY(40px) scale(0.95);
+    opacity: 0;
+    filter: brightness(200%);
+  }
+  60% {
+    transform: translateY(-5px) scale(1.03);
+    opacity: 0.9;
+    filter: brightness(110%);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    filter: brightness(100%);
+  }
+}
+
+.omori-dialog.pop-in {
+  animation: dialog-pop 0.9s ease-out forwards;
+}
+
+/* Dashboard board tone update */
+.dashboard-board {
+  background: #ffffff;
+  box-shadow: 6px 6px 0 #000;
+  border: 4px solid #345075;
+}
+
+/* Dashboard info panel */
+.dashboard-board p {
+  background: #fef5d7;
+  border: 2px dashed #d3a93e;
+  padding: 10px;
+  font-size: 11px;
+  border-radius: 6px;
+}
+
+/* Data box */
+.data-box {
+  background: #dbe8f3;
+  box-shadow: 3px 3px 0 #345075;
+  border: 3px double #345075;
+}
+
+/* Modal overlay pop */
+.modal-content {
+  background: #fdfdfd;
+  box-shadow: 4px 4px 0 #345075;
+  border-radius: 10px;
+}
+
+/* Save/Cancel theme */
+.btn-save {
+  background-color: #2db659;
+  color: #fff;
+}
+.btn-cancel {
+  background-color: #d33f49;
+  color: #fff;
+}
+.btn-save:hover {
+  background-color: #27a14f;
+}
+.btn-cancel:hover {
+  background-color: #b52d3a;
+}
+
+.alert-success,
+.alert-error {
+  position: fixed;
+  top: 240px;
+  left: 40%;
+  transform: translateX(-30%) scale(0.8); /* keep your 30% alignment */
+  z-index: 9999;
+  padding: 12px 20px;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0px 3px 6px rgba(0,0,0,0.2);
+  font-family: 'Press Start 2P', monospace; /* Pixel style */
+  animation: alert-pop 0.9s ease-out forwards, fadeOut 0.6s ease-in forwards 4.5s;
+  pointer-events: none;
+}
+
+.alert-success {
+  background-color: #d0f5c8;
+  color: #1f4f2a;
+  border: 2px solid #1f4f2a;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 2px solid #721c24;
+}
+
+/* Omori-style Pop In Animation */
+@keyframes alert-pop {
+  0% {
+    transform: translateX(-30%) translateY(40px) scale(0.95);
+    opacity: 0;
+    filter: brightness(200%);
+  }
+  60% {
+    transform: translateX(-30%) translateY(-5px) scale(1.03);
+    opacity: 0.9;
+    filter: brightness(110%);
+  }
+  100% {
+    transform: translateX(-30%) translateY(0) scale(1);
+    opacity: 1;
+    filter: brightness(100%);
+  }
+}
+
+/* Fade out after delay */
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateX(-30%) translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-30%) translateY(-20px) scale(0.95);
+  }
+}
+
+
+  .transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(255, 255, 255);
+  z-index: 9999;
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 1s ease-in-out;
+}
+
+.transition-overlay.hidden {
+  opacity: 0;
+}
+
+.pixel-exit-box {
+  position: absolute;
+  top: 280px;
+  left: 200px;
+  background: #0f1e36; /* Darker for better contrast */
+  border: 4px double #ffffff; /* Double border for a CRT/TV style */
+  padding: 24px 20px 20px 20px;
+  font-family: 'Press Start 2P', monospace;
+  color: #ffffff;
+  z-index: 9;
+  width: 320px;
+  box-shadow: 6px 6px 0 #000, -2px -2px 0 #345075; /* Adds depth */
+  display: none;
+  flex-direction: column;
+  animation-fill-mode: forwards;
+  gap: 20px;
+}
+
+.pixel-exit-box.show {
+  display: flex;
+  animation: tv-on 0.4s ease forwards;
+}
+
+.pixel-exit-box.closing {
+  display: flex;
+  animation: tv-off 0.3s ease forwards;
+}
+
+.pixel-exit-box .exit-question {
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.5;
+  color: #c8d9ec;
+  text-shadow: 1px 1px #000;
+}
+
+.pixel-exit-box .exit-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.pixel-exit-box .exit-buttons button {
+ font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  background: #345075;
+  border: 2px solid #000;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 6px;
+  box-shadow: 2px 2px 0 #000;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.pixel-exit-box .exit-buttons button:hover {
+  background-color: #506da1;
+  transform: translateY(-2px);
+}
+
+.dialog-text {
+  animation: fadeIn 0.3s ease;
+  line-height: 1.5;
+}
+
+.dialog-text span {
+  display: inline-block;
+  animation: popIn 0.1s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-3px); }
+  40%, 80% { transform: translateX(3px); }
+}
+
+.dialog-text.shake {
+  animation: shake 0.4s ease;
+}
+
+@keyframes pixel-drop {
+  0% {
+    transform: translateY(-150px);
+    opacity: 0;
+  }
+  40% {
+    transform: translateY(20px); /* overshoot a bit */
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(-10px); /* bounce up */
+  }
+  80% {
+    transform: translateY(5px);  /* bounce down */
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.pixel-title-bar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 780px;
+  height: 70px;
+
+  background: #e2e8f0;
+  color: #1e293b;
+  font-family: "Press Start 2P", monospace;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  padding: 10px 18px;
+
+  border: 4px solid #0f172a;
+  box-shadow: 6px 6px 0 #0f172a;
+  image-rendering: pixelated;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  /* 👇 Animation */
+  animation: pixel-drop 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+
+/* Title text (Fix Quest) */
+.pixel-title-bar .title-text {
+  color: #0f172a;
+  text-shadow: 2px 2px 0 #94a3b8; /* subtle retro shadow */
+}
+
+/* Username (status style) */
+.pixel-title-bar .user-name {
+  margin-left: auto;
+  font-size: 20px;
+  padding: 6px 12px;
+  background: #16a34a;
+  color: #fff;
+  border: 3px solid #0f172a;
+  box-shadow: 2px 2px 0 #0f172a;
+}
+
+
+/* dotted underline */
+.pixel-title-bar::after {
+  content: "";
+  position: absolute;
+  bottom: 8px;
+  left: 20px;
+  right: 20px;
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    #94a3b8,
+    #94a3b8 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  opacity: 0.6;
+}
+
+/* PIXEL MODAL STYLE (NEW) */
+
+.pixel-modal {
+  display: none;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 420px;
+  background: #ffffff;
+  border: 3px solid #0f172a;
+  box-shadow: 5px 5px 0 #0f172a, inset -2px -2px 0 #cbd5e1, inset 2px 2px 0 #f1f5f9;
+  padding: 18px;
+  font-family: "Press Start 2P", monospace;
+  z-index: 1200;
+  border-radius: 8px;
+  color: #0f172a;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.8);
+  transition: opacity 0.3s ease;
+  image-rendering: pixelated;
+  align-items: flex-end;
+}
+
+/* Show Modal with TV-on Animation */
+.pixel-modal.show {
+  display: flex !important;
+  animation: tv-on 0.4s ease forwards;
+  pointer-events: auto;
+}
+
+/* Hide Modal with TV-off Animation */
+.pixel-modal.closing {
+  display: flex !important;
+  animation: tv-off 0.3s ease forwards;
+  pointer-events: none;
+}
+
+/* Fully Hidden */
+.pixel-modal.hidden {
+  display: none;
+}
+
+
+/* Make modal-content a positioning container */
+.pixel-modal-content {
+  position: relative; /* ✅ so mascot anchors inside */
+  background: #f8fafc;
+  border: 2px solid #0f172a;
+  box-shadow: 3px 3px 0 #0f172a;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-radius: 6px;
+  overflow: hidden; /* optional: prevents mascot from sticking out */
+}
+
+/* Mascot container with box */
+.pixel-modal-content .mascot-box {
+  position: absolute;
+  right: 20px;
+  bottom: 20px; /* a bit lower so mascot sits on the box */
+  width: 170px;
+  height: 150px;
+  background: #fff;
+  border: 4px solid #345075;
+  box-shadow: 6px 6px 0 #000;
+  border-radius: 12px;
+  display: flex;
+  align-items: flex-end;  /* mascot sits on bottom */
+  justify-content: center;
+  padding-bottom: 10px;
+  z-index: 1;
+}
+
+/* Mascot inside the box */
+.pixel-modal-content .mascot {
+  position: relative;
+  width: 170px;
+  height: 180px;
+  bottom: -30px;
+  background: url('../img/mascot talk.png') no-repeat center/contain;
+  image-rendering: pixelated;
+  pointer-events: none; 
+}
+
+/* Mascot container with box */
+.pixel-modal-content .mascot-box1 {
+  position: absolute;
+  right: 20px;
+  bottom: 10px; /* a bit lower so mascot sits on the box */
+  width: 150px;
+  height: 110px;
+  background: #fff;
+  border: 4px solid #345075;
+  box-shadow: 6px 6px 0 #000;
+  border-radius: 12px;
+  display: flex;
+  align-items: flex-end;  /* mascot sits on bottom */
+  justify-content: center;
+  padding-bottom: 10px;
+  z-index: 1;
+}
+
+/* Mascot inside the box */
+.pixel-modal-content .mascot1 {
+  position: relative;
+  width: 140px;
+  height: 150px;
+  bottom: -30px;
+  background: url('../img/mascot talk.png') no-repeat center/contain;
+  image-rendering: pixelated;
+  pointer-events: none; 
+}
+
+/* Speech bubble always above mascot */
+.pixel-modal-content .speech-bubble {
+  position: relative;
+  background: #fff;
+  border: 2px solid #0f172a;
+  padding: 8px 12px;
+  font-size: 10px;
+  border-radius: 6px;
+  box-shadow: 2px 2px 0 #0f172a;
+  margin-bottom: 6px;
+}
+
+
+/* TITLE */
+.pixel-modal-content h3 {
+  font-size: 12px;
+  text-align: center;
+  margin: 0 0 10px 0;
+  padding-bottom: 6px;
+  border-bottom: 2px dashed #0f172a;
+  color: #345075;
+}
+
+/* BUTTON ROW */
+.pixel-modal-content .btn-row {
+  display: flex;
+  gap: 8px;
+  flex-direction: column; 
+  font-family: "Press Start 2P", monospace;
+}
+
+.pixel-modal-content button {
+   width: 50%; 
+  flex: 1;
+  padding: 8px;
+  background: #e2e8f0;
+  border: 2px solid #0f172a;
+  font-size: 12px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #0f172a;
+  transition: transform 0.1s, background 0.2s;
+}
+
+.pixel-modal-content .btn-row2 { 
+display: flex; 
+gap: 8px; 
+flex-wrap: wrap; 
+} 
+
+.pixel-modal-content button { 
+flex: 1; 
+padding: 8px; 
+background: #e2e8f0; 
+border: 2px solid #0f172a; 
+font-size: 12px; 
+text-transform: uppercase; 
+cursor: pointer; 
+box-shadow: 2px 2px 0 #0f172a; 
+transition: transform 0.1s, 
+background 0.2s; 
+}
+
+.pixel-modal-content button {
+   width: 50%; 
+  flex: 1;
+  padding: 8px;
+  background: #e2e8f0;
+  border: 2px solid #0f172a;
+  font-size: 12px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #0f172a;
+  transition: transform 0.1s, background 0.2s;
+}
+
+
+.pixel-modal-content button:hover {
+  background: #cbd5e1;
+  transform: translate(-2px, -2px);
+}
+
+/* cancel btn */
+.pixel-modal-content .btn-cancel {
+  background: #ef4444;
+  color: #fff;
+}
+.pixel-modal-content .btn-cancel:hover {
+  background: #dc2626;
+}
+
+/* INPUTS */
+.pixel-modal-content input,
+.pixel-modal-content select {
+  width: 100%;
+  border: 2px solid #0f172a;
+  padding: 10px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 12px;
+  border-radius: 4px;
+  box-shadow: inset 2px 2px 0 #cbd5e1, inset -2px -2px 0 #f1f5f9;
+}
+
+/* LABELS */
+.pixel-modal-content label {
+  font-size: 10px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.pixel-music-container {
+    position: absolute;
+    top: 20px; 
+    right: 210px;
+    z-index: 9;
+}
+
+.pixel-music-btn {
+    font-size: 20px;
+    padding: 6px 10px;
+    background: #3b4c77;
+    color: white;
+    border: 3px solid #000;
+    box-shadow: 4px 4px #1a1a1a;
+    cursor: pointer;
+    image-rendering: pixelated;
+    font-family: "Press Start 2P", monospace; /* Google pixel font */
+}
+
+.pixel-music-btn:hover {
+    background: #4d65a4;
+}
+
+.pixel-music-btn:active {
+    box-shadow: 2px 2px #1a1a1a;
+    transform: translate(2px, 2px);
+}
+

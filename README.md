@@ -86,6 +86,8 @@ Through FixQuest, I gained hands-on experience in:
 It’s not just a project —  
 it’s proof of how I observe systems, identify problems, and build solutions independently.
 
+---
+
 <p align="center">
   <i>⚙️ FixQuest — Fixing workflows, one task at a time.</i><br>
 </p>

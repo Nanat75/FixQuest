@@ -71,9 +71,6 @@ Through FixQuest, I gained hands-on experience in:
 - 🗂️ **CRUD-Based System Design**  
   Structuring data flow for maintainability and clarity.
 
-- 🎨 **UI Design with Purpose**  
-  Designing interfaces that prioritize function while remaining visually engaging.
-
 - 🚀 **Independent Problem Solving**  
   Building a complete system outside formal requirements.
 

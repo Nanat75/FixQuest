@@ -5,7 +5,7 @@
 
 </div>
 
-> **Status:** ✅ Functional Prototype / Internship Side Project
+> **Status:** ✅ Completed / Internship Side Project
 
 ---
 
